@@ -1,0 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   brainfuck.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/19 10:11:28 by lnicosia          #+#    #+#             */
+/*   Updated: 2018/11/19 11:04:55 by lnicosia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <unistd.h>
+
+void	brainfuck(char *str)
+{
+	char	*ptr;
+
+	ptr = (char*)malloc(sizeof(char) * 2048);
+	while (*str)
+	{
+		if (*str == '>')
+			ptr++;
+		else if (*str == '<')
+			ptr--;
+		else if (*str == '+')
+			(*ptr)++;
+		else if (*str == '-')
+			(*ptr)--;
+		else if (*str == '[' && !*ptr)
+			while (*str != ']')
+				(*str)++;
+		else if (*str == ']' && !*ptr)
+			while (*str != '[')
+				(*str)--;
+		else if (*str == '.')
+			write(1, ptr, 1);
+		str++;
+	}
+}
+
+int		main(int ac, char **av)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (ac == 2)
+	{
+		if (!(str = (char*)malloc(sizeof(*str) * 2048)))
+			return (-1);
+		while (j < 2048)
+		{
+			str[j] = 0;
+			j++;
+		}
+		j = 0;
+		while (av[1][j])
+		{
+			//write(1, &av[1][j], 1);
+			if (av[1][j] == '>')
+				str++;
+			else if (av[1][j] == '<')
+				str--;
+			else if (av[1][j] == '+')
+				(*str)++;
+			else if (av[1][j] == '-')
+				(*str)--;
+			else if (av[1][j] == '.')
+			write(1, str, 1);
+			else if (av[1][j] == '[' && !*str)
+			{
+				i++;
+				while (i != 0)
+				{
+					j++;
+					if (av[1][j] == '[')
+						i++;
+					else if (av[1][j] == ']')
+						i--;
+				}
+			}
+			else if (av[1][j] == ']' && *str)
+			{
+				i++;
+				while (i != 0)
+				{
+					j--;
+					if (av[1][j] == ']')
+						i++;
+					else if (av[1][j] == '[')
+						i--;
+				}
+			}
+			j++;
+		}
+		//brainfuck(av[1]);
+	}
+	else
+		write(1, "\n", 1);
+	return (0);
+}
