@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 17:48:54 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/11/19 18:34:20 by lnicosia         ###   ########.fr       */
+/*   Updated: 2018/11/20 13:26:10 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 	while (lst)
 	{
 		tmp = lst;
-		while (tmp)
+		while (tmp->next)
 		{
-			if (tmp->next)
-				if (cmp(tmp->data, tmp->next->data) == 0)
-				{
-					inttmp = tmp->data;
-					tmp->data = tmp->next->data;
-					tmp->data = inttmp;
-				}
+			if (cmp(tmp->data, tmp->next->data) == 0)
+			{
+				inttmp = tmp->data;
+				tmp->data = tmp->next->data;
+				tmp->next->data = inttmp;
+			}
 			tmp = tmp->next;
 		}
 		lst = lst->next;
