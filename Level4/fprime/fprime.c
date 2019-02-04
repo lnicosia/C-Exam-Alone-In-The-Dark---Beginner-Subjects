@@ -3,63 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   fprime.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/24 12:14:04 by exam              #+#    #+#             */
-/*   Updated: 2018/08/24 12:53:53 by exam             ###   ########.fr       */
+/*   Created: 2019/02/04 10:42:36 by lnicosia          #+#    #+#             */
+/*   Updated: 2019/02/04 10:47:40 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int		ft_is_prime(int nb)
+int		main(int ac, char **av)
 {
-	int		div;
+	unsigned int	nb;
+	int				i;
 
-	div = 2;
-	while (div < nb)
+	if (ac == 2)
 	{
-		if (nb % div == 0)
-			return (0);
-		div++;
-	}
-	return (1);
-}
-
-int		main(int argc, char **argv)
-{
-	int		nb;
-	int		first;
-	int		i;
-
-	nb = 0;
-	i = 2;
-	first = 0;
-	if (argc == 2)
-	{
-		nb = atoi(argv[1]);
-
-		if (nb > 0)
+		nb = atoi(av[1]);
+		if (nb == 1)
+			printf("1");
+		else
 		{
-			if (ft_is_prime(nb))
+			i = 1;
+			while (nb > 1)
 			{
-				printf("%d\n",nb);
-				return (0);
-			}
-			while (i <= nb)
-			{
-				if (ft_is_prime(i) && (nb % i == 0))
+				if (nb % ++i == 0)
 				{
-					if (first)
+					printf("%d", i);
+					nb /= i;
+					if (nb > 1)
 						printf("*");
-					else
-						first++;
-					printf("%d",i);
-					nb = nb / i;
+					i--;
 				}
-				else
-					i++;
 			}
 		}
 	}
