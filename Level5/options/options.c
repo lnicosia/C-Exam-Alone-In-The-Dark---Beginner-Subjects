@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   biggest_pal.c                                      :+:      :+:    :+:   */
+/*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/04 10:55:35 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/02/04 19:39:23 by lnicosia         ###   ########.fr       */
+/*   Created: 2019/02/04 16:51:54 by lnicosia          #+#    #+#             */
+/*   Updated: 2019/02/04 17:17:25 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,59 +27,54 @@ void	ft_putstr(char *str)
 	write(1, str, i);
 }
 
-int		check_pal(int start, int end, char *str)
-{
-	int	i;
-	int	j;
-
-	i = start;
-	j = end;
-	while (str[i] == str[j])
-	{
-		i++;
-		j--;
-	}
-	if (i >= j)
-	{
-		write(1, str + start, end - start + 1);
-		return (end - start + 1);
-	}
-	return (0);
-}
-
 int		main(int ac, char **av)
 {
-	int	i;
-	int	j;
-	int	len;
-	int	size;
-	int	size2;
-	int	start;
-	int	end;
+	int		i;
+	int		j;
+	char	tab[32];
 
 	i = 0;
-	j = 0;
-	len = 0;
-	size = 0;
-	size2 = 0;
-	start = 0;
-	end = 0;
-	if (ac == 2)
+	while (i < 32)
 	{
-		while (av[1][len])
-			len++;
-		size = len;
-		while (size >= 0)
+		tab[i] = '0';
+		i++;
+	}
+	if (ac == 1)
+	{
+		ft_putstr("options: abcdefghijklmnopqrstuvwxyz\n");
+		return (0);
+	}
+	i = 1;
+	while (av[i])
+	{
+		if (av[i][0] != '-' || (av[i][0] == '-' && av[i][1] == 'h'))
 		{
-			i = 0;
-			while (size + i < len)
-			{
-				if (check_pal(i, size + i, av[1]) > 1)
-					return (0);
-				i++;
-			}
-			size--;
+			ft_putstr("options: abcdefghijklmnopqrstuvwxyz\n");
+			return (0);
 		}
+		j = 1;
+		while (av[i][j])
+		{
+			if (av[i][j] >= 'a' && av[i][j] <= 'z')
+			{
+				tab[31 - av[i][j] + 97] = '1';
+			}
+			else
+			{
+				ft_putstr("Invalid Option\n");
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < 32)
+	{
+		if (i > 0 && i % 8 == 0)
+			ft_putchar(' ');
+		ft_putchar(tab[i]);
+		i++;
 	}
 	ft_putchar('\n');
 	return (0);
