@@ -6,39 +6,12 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:11:28 by lnicosia          #+#    #+#             */
-/*   Updated: 2018/11/19 11:04:55 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/04 20:14:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-
-void	brainfuck(char *str)
-{
-	char	*ptr;
-
-	ptr = (char*)malloc(sizeof(char) * 2048);
-	while (*str)
-	{
-		if (*str == '>')
-			ptr++;
-		else if (*str == '<')
-			ptr--;
-		else if (*str == '+')
-			(*ptr)++;
-		else if (*str == '-')
-			(*ptr)--;
-		else if (*str == '[' && !*ptr)
-			while (*str != ']')
-				(*str)++;
-		else if (*str == ']' && !*ptr)
-			while (*str != '[')
-				(*str)--;
-		else if (*str == '.')
-			write(1, ptr, 1);
-		str++;
-	}
-}
 
 int		main(int ac, char **av)
 {
@@ -97,7 +70,6 @@ int		main(int ac, char **av)
 			}
 			j++;
 		}
-		//brainfuck(av[1]);
 	}
 	else
 		write(1, "\n", 1);

@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:55:35 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/02/04 19:39:23 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/03/25 10:54:05 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		check_pal(int start, int end, char *str)
 	if (i >= j)
 	{
 		write(1, str + start, end - start + 1);
+		write(1, "\n", 1);
 		return (end - start + 1);
 	}
 	return (0);

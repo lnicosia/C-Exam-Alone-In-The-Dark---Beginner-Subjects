@@ -6,7 +6,7 @@
 /*   By: lnicosia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 16:51:54 by lnicosia          #+#    #+#             */
-/*   Updated: 2019/02/04 17:17:25 by lnicosia         ###   ########.fr       */
+/*   Updated: 2019/02/04 20:22:16 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,16 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	i = 1;
-	while (av[i])
+	while (av[i] && av[i][0] == '-')
 	{
-		if (av[i][0] != '-' || (av[i][0] == '-' && av[i][1] == 'h'))
+		if (av[i][1] == 'h')
 		{
 			ft_putstr("options: abcdefghijklmnopqrstuvwxyz\n");
+			return (0);
+		}
+		if (av[i][1] == '\0')
+		{
+			ft_putstr("Invalid Option\n");
 			return (0);
 		}
 		j = 1;
